@@ -14,7 +14,7 @@
            var password = $("#txtPassword").val();
            var userName = $("#txtUserName").val();
            $.ajax({
-               url:"/login/loginconfirm",
+               url:"/confirm/",
                type:"post",
                dataType:"json",
                success:function(data){
@@ -22,7 +22,7 @@
                        alert("成功");
                    }
                    else {
-                       alert(result.resultMsg);
+                       alert(data.msg);
                    }
                }
            });
@@ -35,52 +35,58 @@
            //});
        }
 
-       function TextFocus(obj){
+       function TextBlur(obj){
+           var a=$(obj).val();
+debugger;
             if($(obj).val()){//有数据时，将提示信息设为隐藏
+                debugger;
                 $(obj).next().css("display","none");
             }
             else{//无数据时，将提示信息设为显示
+                debugger;
                 $(obj).next().css("display","");
             }
        }
+
+       $(function(){
+           $("#tbMain").css("height",$(window).height()-25).css("width",$(window).width());
+
+       })
+
     </script>
 </head>
 <body>
-    <table cellpadding="0" cellspacing="0" border="0" style="height: 660px; width: 100%;
-        padding-top: 0px; background: url(/static/images/login/login_bg.jpg) no-repeat;">
+ {% csrf_token %}
+    <table id="tbMain" cellpadding="0" cellspacing="0" border="0" style="height: 100%; width: 100%;padding-top: 0px;background-size:100% 100%; background: url(/static/images/login/login_bg.jpg) no-repeat;">
         <tr>
-            <td style="width: 233px; padding-left: 460px;">
-                <table border="0" style="width: 100%; height: 120px; margin-top: 5px;" cellpadding="8">
+            <td style="width: 333px; padding-left: 0px;">
+                <table border="0" style="width: 100%; height: 120px; margin-top: 100px;margin-left:-30px;" cellpadding="8">
                     <tr>
                         <td style="text-align: right; vertical-align: middle; width: 40%">
                             <span style="color: #464a89; font-size: 12px;">用户名</span>:
                         </td>
-                        <td align="left" colspan="2">
-                            <input type="text" maxlength="15" width="115px" Style="border: 1px solid #71779b;" id="txtUserName"  onfocus="TextFocus(this)"  />
+                        <td align="left">
+                            <input type="text" maxlength="15" Style="border: 1px solid #71779b; width:118px; height: 20px" id="txtUserName" onblur="TextBlur(this)"  />
                             <span style="display:none; color: red">用户名必填</span>
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: right; vertical-align: middle">
                             <span style="color: #464a89; font-size: 12px;">密&nbsp;&nbsp;码</span>:
-
                         </td>
-                        <td align="left" colspan="2">
-                            <input type="password" maxlength="15" width="115" style="border: 1px solid #71779b;" id="txtPassword" onfocus="TextFocus(this)"/>
+                        <td align="left">
+                            <input type="password" maxlength="15" style="border: 1px solid #71779b; width:118px; height: 20px" id="txtPassword" onblur="TextBlur(this)"/>
                             <span style="display:none; color: red">密码必填</span>
                         </td>
                     </tr>
                     <tr>
                         <td>
                         </td>
-                        <td colspan="2" height="20" style="height: 20px">
-                            <input type="button" value="登录" style="background: url(../static/images/login/login_button.jpg) no-repeat;border: 0px; width: 89px; height: 28px; border-width: :0px;"  />
+                        <td height="20" style="height: 20px">
+                            <input type="button" onclick="Login()" style="background: url(../static/images/login/login_button.jpg) no-repeat;border: 0px; width: 89px; height: 28px; border-width: :0px;"  />
                         </td>
                     </tr>
                 </table>
-            </td>
-            <td>
-                &nbsp;
             </td>
         </tr>
     </table>

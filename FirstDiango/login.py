@@ -8,9 +8,9 @@ def login(request):
 
 
 # 登录确认
-def loginconfirm(request):
+def confirm(request):
     username = request.POST.get("userName")
     password = request.POST.get("password")
     if username == "" or password == "":
-        return HttpResponse( {"result":"false", "resultmsg":"用户名与密码必须填写"})
-    return HttpResponse({"result": "true", "resultmsg": ""})
+        return HttpResponse({"result": "false", "msg": "用户名与密码必须填写"})
+    return HttpResponse({"result": "true", "msg": ""})

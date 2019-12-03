@@ -22,6 +22,7 @@ from FirstDiango import config
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'login/', login.login),
+    #url(r'login/', login.login),
+    url(r'confirm/', login.confirm),
     url(r'config/GetRsaPubKey/', config.GetRsaPubKey)
 ]
